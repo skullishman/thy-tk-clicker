@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clicker Game</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+    #container {
+        position: relative;
+        width: 600px;
+        height: 400px;
+        margin: 50px auto;
+        border: 2px solid #ccc;
+        overflow: hidden;
+    }
+    #clickable {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        cursor: pointer;
+    }
+    .particle {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background-image: url('pur-thy.png');
+        background-size: cover;
+    }
+</style>
+</head>
+<body>
+<div id="container">
+    <img id="clickable" src="thy-tk.png" alt="Click Me!" onclick="clickItem()">
+</div>
+<p id="points">TK Points: <span id="pointCount">0</span></p>
+<script>
+    var points = 0;
+
+    function clickItem() {
+        points++;
+        updatePoints();
+        spawnParticle();
+    }
+
+    function updatePoints() {
+        document.getElementById("pointCount").innerText = points;
+    }
+
+    function spawnParticle() {
+        var particle = document.createElement("div");
+        particle.className = "particle";
+        particle.style.left = Math.random() * 550 + "px";
+        particle.style.top = "-50px";
+        document.getElementById("container").appendChild(particle);
+
+        var speed = Math.random() * 2 + 1; // Adjust speed as needed
+        var animation = particle.animate([
+            { top: "-50px" },
+            { top: "450px" }
+        ], {
+            duration: speed * 1000,
+            easing: "linear",
+            fill: "forwards"
+        });
+
+        animation.onfinish = function () {
+            particle.remove();
+        };
+
+        animation.oncancel = function () {
+            particle.remove();
+        };
+
+        animation.pause();
+        animation.play();
+    }
+</script>
+</body>
+</html>
