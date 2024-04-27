@@ -8,13 +8,15 @@
     body {
         font-family: Arial, sans-serif;
         text-align: center;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
     }
     #container {
         position: relative;
         width: 600px;
         height: 400px;
         margin: 50px auto;
-        border: 2px solid #ccc;
         overflow: hidden;
     }
     #clickable {
@@ -23,6 +25,7 @@
         left: 50%;
         transform: translate(-50%, -50%);
         cursor: pointer;
+        border: none; /* Remove border */
     }
     .particle {
         position: absolute;
@@ -56,7 +59,7 @@
         particle.className = "particle";
         particle.style.left = Math.random() * 550 + "px";
         particle.style.top = "-50px";
-        document.getElementById("container").appendChild(particle);
+        document.body.appendChild(particle); // Append particles to body
 
         var speed = Math.random() * 2 + 1; // Adjust speed as needed
         var animation = particle.animate([
